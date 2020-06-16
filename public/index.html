@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/prism.min.css"/>
+    <style>
+        textarea {
+            border-width: 1px;
+            border-color: black;
+            box-shadow:
+                0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+    </style>
+</head>
+
+<body>
+    <script src="static/js/components/prism-core.min.js"></script>
+    <script src="static/js/prism-autoloader.min.js"></script>
+    <script>
+        window.normalize = () => {
+            let codeView = document.getElementById("normalizedTree")
+            let mapping = document.getElementById("mapping")
+            fetch("/normalize", {
+                method: "Post",
+                body: JSON.stringify({ code: document.getElementById("codeSample").value })
+            }).then(res => res.json())
+                //   .then(res => {console.log(res);res})
+                .then(data => {
+                    console.log(data)
+
+                    codeView.innerHTML = data.output.tree
+                    Prism.highlightElement(codeView);
+                    mapping.innerHTML = JSON.stringify(data.output.map, null, 2)
+                    Prism.highlightElement(mapping)
+                })
+                .catch(err => console.warn(err))
+
+        }
+    </script>
+
+    <textarea id="codeSample" value="Hello" rows="10" autofocus style="width: 41%">proc hello*: string =
+  "Hello, World!"</textArea>
+    <button onclick="window.normalize()">Normalize</button>
+    <pre class="language-nim">
+        <code  id="normalizedTree">
+proc hello*: string =
+  "Hello, World!"</code>
+    </pre>
+    <pre class="language-json"><code id="mapping"><pre></pre></code></pre>
+
+</body>
+
+</html>
