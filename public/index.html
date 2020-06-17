@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="static/css/prism.min.css"/>
+    <link rel="stylesheet" href="static/css/prism.min.css" />
     <style>
         textarea {
             border-width: 1px;
@@ -42,14 +42,17 @@
         }
     </script>
 
-    <textarea id="codeSample" value="Hello" rows="10" autofocus style="width: 41%">proc hello*: string =
+    <textarea id="codeSample" value="Hello" rows="14" autofocus cols="60">proc hello*: string =
   "Hello, World!"</textArea>
     <button onclick="window.normalize()">Normalize</button>
+    <br>
+    <label for="codeSample">Normalized Source Code</label>
     <pre class="language-nim">
         <code  id="normalizedTree">
 proc hello*: string =
   "Hello, World!"</code>
     </pre>
+    <label>Mapping of placeholders</label>
     <pre class="language-json"><code id="mapping"><pre></pre></code></pre>
 
 </body>
