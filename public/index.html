@@ -27,7 +27,8 @@
             fetch(`/${endpoint}`, {
                 method: "Post",
                 body: JSON.stringify({ code: document.getElementById("codeSample").value })
-            }).then(res => res.json())
+            })
+                .then(res => res.json())
                 .then(data => {
                     console.log(data)
 
@@ -35,15 +36,15 @@
                     Prism.highlightElement(codeView);
                     mapping.innerHTML = JSON.stringify(data.output.map, null, 2)
                     Prism.highlightElement(mapping)
-                })
-                .catch(err => console.warn(err))
+                }).catch(err => console.warn(err))
 
         }
     </script>
 
-    <textarea id="codeSample" value="Hello" rows="14" autofocus cols="60">proc hello*: string =
+    <textarea id="codeSample" value="Hello" rows="10" autofocus cols="60">proc hello*: string =
   "Hello, World!"</textArea>
     <button onclick="window.getRepr('normalize')">Normalize</button>
+    <button onclick="window.getRepr('dumptree')">Dump Tree</button>
     <br>
     <label for="codeSample">Normalized Source Code</label>
     <pre class="language-nim">
