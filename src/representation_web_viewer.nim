@@ -10,7 +10,6 @@ routes:
   post "/normalize":
     writeFile("./public/code.nim", parseJson(request.body)["code"].getStr)
     let (output, errC) = execCmdEx("nim c -f --hints:off src/representer")
-    echo output
     resp(
       Http200, 
       "{\"exitCode\":" & $errc & ",\"output\":" & output & "}",
