@@ -28,7 +28,6 @@
                 method: "Post",
                 body: JSON.stringify({ code: document.getElementById("codeSample").value })
             }).then(res => res.json())
-                //   .then(res => {console.log(res);res})
                 .then(data => {
                     console.log(data)
 
