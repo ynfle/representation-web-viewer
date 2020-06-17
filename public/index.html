@@ -21,10 +21,10 @@
     <script src="static/js/components/prism-core.min.js"></script>
     <script src="static/js/prism-autoloader.min.js"></script>
     <script>
-        window.normalize = () => {
+        window.getRepr = (endpoint) => {
             let codeView = document.getElementById("normalizedTree")
             let mapping = document.getElementById("mapping")
-            fetch("/normalize", {
+            fetch(`/${endpoint}`, {
                 method: "Post",
                 body: JSON.stringify({ code: document.getElementById("codeSample").value })
             }).then(res => res.json())
@@ -44,7 +44,7 @@
 
     <textarea id="codeSample" value="Hello" rows="14" autofocus cols="60">proc hello*: string =
   "Hello, World!"</textArea>
-    <button onclick="window.normalize()">Normalize</button>
+    <button onclick="window.getRepr('normalize')">Normalize</button>
     <br>
     <label for="codeSample">Normalized Source Code</label>
     <pre class="language-nim">
